@@ -17,10 +17,10 @@ https://doi.org/10.5281/zenodo.23498569, as copied into dart-dmp-template from i
 Labels of the dataset fields and several messages in src/i18n/en.js are taken from its catalogue
 (CC BY 4.0).
 
-The question under `q.tools` and the guidance under `q.kinds.guide`, `q.formats.guide` and
-`q.tools.guide` in src/i18n/en.js are taken word for word from:
+The question under `q.tools` and the guidance under `q.tools.guide` in src/i18n/en.js are taken
+word for word from:
   Science Europe (2021). Practical Guide to the International Alignment of Research Data
   Management (Extended Edition). Zenodo. https://doi.org/10.5281/zenodo.4915862
   licensed under CC BY 4.0.
-The questions under `q.kinds` and `q.formats` take up the first two parts of that guide's question
-on the kinds, formats and volumes of data.
+The dataset fields on the type of data, its formats and its size take up that guide's question on
+the kinds, formats and volumes of data.

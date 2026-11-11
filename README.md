@@ -24,8 +24,8 @@ Language: English.
   preferred storage format (S3, SMB, NFS, a parallel file system, block storage within a VM),
   personal and sensitive data, access and file formats. The fields on publication (DOI, date,
   repository, licence) are optional and shown folded.
-- Five questions: the kinds of data, their formats, how long the data need to be retained, who
-  needs access to them, and the methods or software tools needed to access and use them.
+- Three questions: how long the data need to be retained, who needs access to them, and the
+  methods or software tools needed to access and use them.
 
 A new form records IT:U, with its ROR ID, as the institution.
 
@@ -40,13 +40,12 @@ Content-Security-Policy names no host the page may connect to.
 
 ## Where the questions come from
 
-Questions 1 and 2 take up the first two parts of one question of Science Europe's Practical Guide to the International
-Alignment of Research Data Management (Extended Edition, 2021,
-<https://doi.org/10.5281/zenodo.4915862>): "What data (for example the kinds, formats, and
-volumes) will be collected or produced?". Its third part, the volumes, is asked for each dataset.
-Question 5 is the guide's, word for word, and so is the guidance shown under questions 1, 2 and
-5. Questions 3 and 4, the examples under question 1 and the dataset fields on files, size, growth
-and storage were written for this form.
+The type of data, the formats and the size asked for each dataset take up one question of
+Science Europe's Practical Guide to the International Alignment of Research Data Management
+(Extended Edition, 2021, <https://doi.org/10.5281/zenodo.4915862>): "What data (for example the
+kinds, formats, and volumes) will be collected or produced?". Question 3 is the guide's, word for
+word, and so is the guidance shown under it. Questions 1 and 2 and the dataset fields on files,
+growth and storage were written for this form.
 
 ## How it is built
 

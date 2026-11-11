@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "hpc-template.json",
-  "description": "The file the IT:U HPC data template writes: a project, its contact, its datasets and the answers to five questions. Empty values are left out, except answers.",
+  "description": "The file the IT:U HPC data template writes: a project, its contact, its datasets and the answers to three questions. Empty values are left out, except answers.",
   "type": "object",
   "required": ["format", "version", "created", "modified", "institution", "project", "contact", "datasets", "answers"],
   "properties": {
@@ -68,10 +68,8 @@
     },
     "answers": {
       "type": "object",
-      "required": ["kinds", "formats", "retention", "access", "tools"],
+      "required": ["retention", "access", "tools"],
       "properties": {
-        "kinds": { "type": "string" },
-        "formats": { "type": "string" },
         "retention": { "type": "string" },
         "access": { "type": "string" },
         "tools": { "type": "string" }

@@ -3,21 +3,22 @@
 // Management (Extended Edition, 2021, https://doi.org/10.5281/zenodo.4915862, CC BY 4.0), as
 // carried by the IT:U data management plan page; tests/page.test.mjs compares them with that
 // page's catalogue when it is present next to this folder. In the guidance, one line is one
-// bullet. `q.kinds` and `q.formats` take up the first two parts of the guide's question
-// "What data (for example the kinds, formats, and volumes) will be collected or produced?".
+// bullet. The dataset fields on the type of data, its formats and its size take up the guide's
+// question "What data (for example the kinds, formats, and volumes) will be collected or produced?".
 // The strings this page shares with the IT:U data management plan page are copied from that
 // page's catalogue (see NOTICE).
 export const en = {
   "ui.lang.aria": "Language",
   "ui.theme.title": "Toggle light/dark theme",
   "ui.theme.aria": "Toggle light/dark theme",
-  "meta.description": "A short form about the data of a project that uses high-performance computing at IT:U: the project, its datasets and five questions, downloaded as a document and as hpc-template.json.",
+  "meta.description": "A short form about the data of a project that uses high-performance computing at IT:U: the project, its datasets and three questions, downloaded as a document and as hpc-template.json.",
   "brand.name": "HPC data template",
   "nav.label": "View",
   "nav.form": "Fill in the template",
   "about.title": "About",
   "ui.eyebrow": "HPC data template",
-  "ui.lede": "Describe the data of a project that uses high-performance computing at IT:U: the project, its datasets and five questions. Download the result as a document and as <b>hpc-template.json</b>. The form is filled in your browser and sent nowhere. A draft is kept in this browser’s storage; download the files to keep it.",
+  "ui.lede": "This template helps you describe the data and computing requirements of your project, to gain access to high-performance computing resources. The questions are very short, and your answers are crucial for planning future capacity and hardware extensions. Depending on your requirements, we may also be able to support you in gaining access to larger HPC clusters.",
+  "ui.lede2": "Please download the result as a document and as <b>hpc-template.json</b>, and send both to <a href=\"mailto:christoph.arthofer@it-u.at\">christoph.arthofer@it-u.at</a>. What you fill in lives only in your browser and is not stored on a server.",
 
   "form.import": "Open an hpc-template.json",
   "form.import.hint": "Opens a file downloaded from this page, to continue it.",
@@ -70,8 +71,8 @@ export const en = {
   "datasets.remove.confirm": "Click again to remove",
   "ds.untitled": "Dataset {n}",
   "ds.title": "Title",
-  "ds.type": "Type",
-  "ds.type.ph": "dataset, software, image …",
+  "ds.type": "Type of data",
+  "ds.type.ph": "simulation output, instrument data, images or video, VM images, archives …",
   "ds.origin": "Are you starting to collect data now as part of the project, or using existing data from repositories?",
   "ds.description": "Description",
   "ds.file_count": "Roughly how many files?",
@@ -82,7 +83,7 @@ export const en = {
   "ds.growth": "Is this a fixed set, or does it keep growing?",
   "ds.growth_per_year": "If it grows, by how much per year?",
   "ds.growth_per_year_unit": "Unit",
-  "ds.storage_interface": "Preferred storage format",
+  "ds.storage_interface": "Preferred storage format (not all formats are supported yet)",
   "datasets.optional": "Publication (optional)",
   "ds.doi": "DOI, once reserved or assigned",
   "ds.doi.ph": "10.5281/zenodo.…",
@@ -97,18 +98,13 @@ export const en = {
   "ds.licence": "Licence",
   "ds.licence_url": "Licence URL",
   "ds.formats": "Formats (MIME types, comma-separated)",
-  "ds.formats.ph": "text/csv, application/json",
+  "ds.formats.ph": "text/csv, application/json, image/tiff, video/mp4",
 
-  "questions.title": "The five questions",
+  "questions.title": "The three questions",
   "questions.count": "{a} of {n} answered",
   "form.answer.label": "Answer",
   "form.answer.ph": "Your answer to the question above",
   "form.guide.toggle": "Guidance from Science Europe",
-  "q.kinds": "What kinds of data will be collected or produced?",
-  "q.kinds.guide": "Give details on the kind of data: for example numeric (databases, spreadsheets), textual (documents), image, audio, video, and/or mixed media.",
-  "q.kinds.hint": "For example raw measurement or instrument data, simulation output, image or video material, VM images, or compressed archives.",
-  "q.formats": "In which formats will the data be collected or produced?",
-  "q.formats.guide": "Give details on the data format: the way in which the data is encoded for storage, often reflected by the filename extension (for example pdf, xls, doc, txt, or rdf).\nJustify the use of certain formats. For example, decisions may be based on staff expertise within the host organisation, a preference for open formats, standards accepted by data repositories, widespread usage within the research community, or on the software or equipment that will be used.\nGive preference to open and standard formats as they facilitate sharing and long-term re-use of data (several repositories provide lists of such ‘preferred formats’).",
   "q.retention": "How long does the data need to be retained?",
   "q.access": "Who needs access to this data?",
   "q.tools": "What methods or software tools will be needed to access and use the data?",
@@ -139,10 +135,10 @@ export const en = {
   "md.modified": "Modified",
   "md.noDatasets": "No dataset listed.",
   "md.unanswered": "Not answered yet.",
-  "md.footer": "Written with the IT:U HPC data template, a draft prepared by DART. Question 5 and the guidance shown on the form come from Science Europe, Practical Guide to the International Alignment of Research Data Management (Extended Edition, 2021, https://doi.org/10.5281/zenodo.4915862), CC BY 4.0. The same content as a file is hpc-template.json.",
+  "md.footer": "Written with the IT:U HPC data template, a draft prepared by DART. Question 3 and the guidance under it come from Science Europe, Practical Guide to the International Alignment of Research Data Management (Extended Edition, 2021, https://doi.org/10.5281/zenodo.4915862), CC BY 4.0. The same content as a file is hpc-template.json.",
 
-  "about.p1": "A short form about the data of a project that uses high-performance computing at IT:U, prepared by DART: the project, its datasets and five questions. It is a draft and has not been adopted as IT:U policy. It is separate from DART’s <a href=\"https://rijdho.github.io/dart-dmp-template/\" target=\"_blank\" rel=\"noreferrer\">data management plan template</a>, and its file, hpc-template.json, is not a plan in the RDA DMP Common Standard.",
-  "about.p2": "Questions 1 and 2 take up the first two parts of one question of Science Europe’s <a href=\"https://doi.org/10.5281/zenodo.4915862\" target=\"_blank\" rel=\"noreferrer\">Practical Guide to the International Alignment of Research Data Management</a> (Extended Edition, 2021): “What data (for example the kinds, formats, and volumes) will be collected or produced?”. Its third part, the volumes, is asked for each dataset. Question 5 is the guide’s, word for word, and so is the guidance under questions 1, 2 and 5, used under CC BY 4.0. Questions 3 and 4, the examples under question 1 and the dataset fields on files, size, growth and storage were written for this form.",
+  "about.p1": "A short form about the data of a project that uses high-performance computing at IT:U, prepared by DART: the project, its datasets and three questions. It is a draft and has not been adopted as IT:U policy. It is separate from DART’s <a href=\"https://rijdho.github.io/dart-dmp-template/\" target=\"_blank\" rel=\"noreferrer\">data management plan template</a>, and its file, hpc-template.json, is not a plan in the RDA DMP Common Standard.",
+  "about.p2": "The type of data, the formats and the size asked for each dataset take up one question of Science Europe’s <a href=\"https://doi.org/10.5281/zenodo.4915862\" target=\"_blank\" rel=\"noreferrer\">Practical Guide to the International Alignment of Research Data Management</a> (Extended Edition, 2021): “What data (for example the kinds, formats, and volumes) will be collected or produced?”. Question 3 is the guide’s, word for word, and so is the guidance under it, used under CC BY 4.0. Questions 1 and 2 and the dataset fields on files, growth and storage were written for this form.",
   "about.p3": "The form is derived from the IT:U data management plan page, which is built on <a href=\"https://doi.org/10.5281/zenodo.23498569\" target=\"_blank\" rel=\"noreferrer\">Actionable DMP</a>. The code is under MIT; the texts are under CC BY 4.0. Nothing is tracked, no cookie is set, and the page loads nothing from anywhere but its own origin.",
   "foot.team": "DART · IT:U Interdisciplinary Transformation University Austria",
   "foot.licence": "Code under MIT, texts under CC BY 4.0",

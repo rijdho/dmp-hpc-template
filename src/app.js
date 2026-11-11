@@ -5,8 +5,8 @@
 import {
   DATASET_FIELDS, LICENCES, PROJECT_FIELDS, QUESTIONS, completeness, createDataset, createForm, getPath, licenceKey,
   optionLabel, parseForm, setPath, stamp, toJson, toMarkdown, validateForm,
-} from './template.js?v=1';
-import { LANGS, getLang, resolveLang, setLang, t } from './i18n/index.js?v=21';
+} from './template.js?v=3';
+import { LANGS, getLang, resolveLang, setLang, t } from './i18n/index.js?v=23';
 
 const $ = (id) => document.getElementById(id);
 const KEY = { draft: 'dmp-hpc-template:draft', theme: 'dmp-hpc-template:theme' };
@@ -204,7 +204,7 @@ function onAddDataset() {
   $(`ds-${form.datasets.length - 1}-title`)?.focus();
 }
 
-// ── the five questions ────────────────────────────────────────────────────────
+// ── the three questions ───────────────────────────────────────────────────────
 
 const guideList = (id) =>
   `<ul class="guide">${t(`q.${id}.guide`).split('\n').map((line) => `<li>${escapeHtml(line)}</li>`).join('')}</ul>`;
@@ -214,7 +214,6 @@ function renderQuestions() {
     <article class="req" id="q-${q.id}">
       <p class="eyebrow">${i + 1}</p>
       <p class="question">${escapeHtml(t(`q.${q.id}`))}</p>
-      ${q.hint ? `<p class="hint when">${escapeHtml(t(`q.${q.id}.hint`))}</p>` : ''}
       ${q.guide ? `<details class="commit"><summary>${escapeHtml(t('form.guide.toggle'))}</summary>${guideList(q.id)}</details>` : ''}
       <label class="field"><span>${escapeHtml(t('form.answer.label'))}</span>
         <textarea class="input" rows="3" data-q="${q.id}"

@@ -3,7 +3,7 @@ message: "If you use this template, please cite it."
 title: "dmp-hpc-template: a short form about the data of projects that use high-performance computing at IT:U"
 abstract: >-
   A page for describing the data of a project that uses high-performance
-  computing at IT:U: the project, its datasets and five questions. The form is
+  computing at IT:U: the project, its datasets and three questions. The form is
   downloaded as a document and as hpc-template.json, a format of its own. It is
   a draft prepared by DART and has not been adopted as IT:U policy. Derived
   from the IT:U data management plan page, which is built on Actionable DMP.

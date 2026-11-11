@@ -28,7 +28,7 @@ function keysUsed() {
   for (const src of [app, read('src/template.js')])
     // A field's `path` is a place in the file, not a key of the catalogue.
     for (const m of src.matchAll(/(?<!path: )'((?:form|md|val|valid|complete|parse|about|nav|ui|ds|opt|q|field|foot|meta|dl|project|datasets|questions|brand)\.[A-Za-z0-9_.]*[A-Za-z0-9_])'/g)) used.add(m[1]);
-  for (const q of T.QUESTIONS) { used.add(`q.${q.id}`); if (q.guide) used.add(`q.${q.id}.guide`); if (q.hint) used.add(`q.${q.id}.hint`); }
+  for (const q of T.QUESTIONS) { used.add(`q.${q.id}`); if (q.guide) used.add(`q.${q.id}.guide`); }
   for (const f of T.PROJECT_FIELDS) {
     used.add(`field.${f.key}`);
     for (const o of f.options ?? []) used.add(T.optionKey(f.key, o));
@@ -64,7 +64,7 @@ function filledForm() {
   Object.assign(form.datasets[0], {
     title: 'Simulation output', type: 'dataset', origin: 'new', description: 'Runs of a model.',
     file_count: '120000', typical_file_size: '2.5', typical_file_size_unit: 'GB', size: '300', size_unit: 'TB',
-    growth: 'growing', growth_per_year: '40', storage_interface: 'parallel_fs',
+    growth: 'growing', growth_per_year: '40', growth_per_year_unit: 'TB', storage_interface: 'parallel_fs',
     doi: 'https://doi.org/10.5281/ZENODO.1234567', issued: '2028-06-30', repository: 'Zenodo',
     repository_url: 'https://zenodo.org', licence_url: 'https://creativecommons.org/licenses/by/4.0/', formats: ['text/csv'],
   });
@@ -72,7 +72,7 @@ function filledForm() {
   return form;
 }
 
-test('the form has the nine project fields, the twenty-two dataset fields and the five questions', () => {
+test('the form has the nine project fields, the twenty-two dataset fields and the three questions', () => {
   assert.deepEqual(T.PROJECT_FIELDS.map((f) => f.key),
     ['project_title', 'contact_name', 'contact_mbox', 'contact_orcid', 'ethical_issues', 'start', 'end', 'steward_after_end', 'funder_name']);
   assert.deepEqual(T.DATASET_FIELDS.filter((f) => !f.optional).map((f) => f.key), [
@@ -80,7 +80,12 @@ test('the form has the nine project fields, the twenty-two dataset fields and th
     'growth', 'growth_per_year', 'growth_per_year_unit', 'storage_interface', 'personal_data', 'sensitive_data', 'data_access', 'formats']);
   assert.deepEqual(T.DATASET_FIELDS.filter((f) => f.optional).map((f) => f.key), ['doi', 'issued', 'repository', 'repository_url', 'licence_url']);
   for (const f of T.DATASET_FIELDS.filter((x) => x.unit)) assert.equal(T.DATASET_FIELDS.find((x) => x.key === f.unit).unitOf, f.key);
-  assert.deepEqual(T.QUESTION_IDS, ['kinds', 'formats', 'retention', 'access', 'tools']);
+  assert.deepEqual(T.QUESTION_IDS, ['retention', 'access', 'tools']);
+});
+
+test('a new dataset has no type, sizes in GB and no personal data', () => {
+  const ds = T.createDataset();
+  assert.deepEqual([ds.type, ds.size_unit, ds.growth_per_year_unit, ds.personal_data], ['', 'GB', 'GB', 'no']);
 });
 
 test('a new form records IT:U with its ROR ID, and is not yet complete', () => {
@@ -186,7 +191,6 @@ test('the quoted question and guidance are those of the IT:U data management pla
   return import(other.href).then(({ en: dmp }) => {
     assert.equal(en['q.tools'], dmp['q.5c']);
     assert.equal(en['q.tools.guide'], dmp['q.5c.guide']);
-    assert.ok(dmp['q.1b.guide'].startsWith(`${en['q.kinds.guide']}\n${en['q.formats.guide']}\n`));
     assert.ok(en['about.p2'].includes(dmp['q.1b']));
     for (const q of T.QUESTIONS) assert.equal((en[`q.${q.id}.guide`] ?? '').split('\n').filter(Boolean).length, q.guide, q.id);
   });

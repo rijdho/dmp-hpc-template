@@ -3,6 +3,16 @@
 ## Unreleased
 
 - The README, `CITATION.cff` and `NEXT.md` name the published page.
+- The introduction says what the answers are for and asks for both downloads to be sent to
+  christoph.arthofer@it-u.at.
+- The dataset field "Type" is "Type of data", empty in a new dataset, with examples.
+- A new dataset gives its estimated size and its growth per year in GB, and says No to personal
+  data.
+- The preferred storage format adds "(not all formats are supported yet)".
+- The examples under formats include an image and a video type.
+- The questions on the kinds and the formats of data are removed, since each dataset already
+  asks for its type and formats; three questions remain. An `hpc-template.json` written before
+  loses its answers to those two questions when it is opened again.
 
 ## 0.1.0 (2026-11-11)
 

@@ -66,13 +66,10 @@ export const DATASET_FIELDS = Object.freeze([
 ].map((f) => Object.freeze(f)));
 
 /**
- * The five questions. `guide` is the number of guidance lines the catalogue holds for the
+ * The three questions. `guide` is the number of guidance lines the catalogue holds for the
  * question (`q.<id>.guide`), all of them Science Europe's; 0 means the form shows none.
- * `hint: true` means the catalogue holds examples for the question (`q.<id>.hint`).
  */
 export const QUESTIONS = Object.freeze([
-  { id: 'kinds', guide: 1, hint: true },
-  { id: 'formats', guide: 3 },
   { id: 'retention', guide: 0 },
   { id: 'access', guide: 0 },
   { id: 'tools', guide: 2 },
@@ -115,9 +112,9 @@ const now = () => new Date().toISOString().replace(/\.\d+Z$/, 'Z');
 
 export function createDataset() {
   return {
-    title: '', type: 'dataset', origin: '', description: '', file_count: '', typical_file_size: '', typical_file_size_unit: 'MB',
-    size: '', size_unit: 'TB', growth: '', growth_per_year: '', growth_per_year_unit: 'TB', storage_interface: '',
-    personal_data: 'unknown', sensitive_data: 'unknown', data_access: 'open', formats: [],
+    title: '', type: '', origin: '', description: '', file_count: '', typical_file_size: '', typical_file_size_unit: 'MB',
+    size: '', size_unit: 'GB', growth: '', growth_per_year: '', growth_per_year_unit: 'GB', storage_interface: '',
+    personal_data: 'no', sensitive_data: 'unknown', data_access: 'open', formats: [],
     doi: '', issued: '', repository: '', repository_url: '', licence_url: '',
   };
 }
@@ -228,7 +225,7 @@ export function validateForm(form) {
   return out;
 }
 
-/** How many of the five questions have an answer, and which do not. */
+/** How many of the three questions have an answer, and which do not. */
 export function completeness(form) {
   const missing = QUESTION_IDS.filter((id) => !filled(form.answers?.[id]));
   return { total: QUESTION_IDS.length, answered: QUESTION_IDS.length - missing.length, missing, complete: missing.length === 0 };
