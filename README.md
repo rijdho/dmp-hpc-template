@@ -20,10 +20,11 @@ Language: English.
   funder.
 - The datasets, one entry each: title, type, description, whether the project collects new data
   or uses existing data from repositories, the number of files and their typical size, the
-  estimated size, whether the set is fixed or keeps growing and by how much per year, the
   preferred storage format (S3, SMB, NFS, a parallel file system, block storage within a VM),
   personal and sensitive data, access and file formats. The fields on publication (DOI, date,
   repository, licence) are optional and shown folded.
+- Storage on the cluster, for the whole project: how much space it needs in total, whether that is
+  a fixed amount or keeps growing, and by how much per year.
 - Three questions: how long the data need to be retained, who needs access to them, and whether
   proprietary software or tools are needed to access and use them.
 
@@ -40,12 +41,12 @@ Content-Security-Policy names no host the page may connect to.
 
 ## Where the questions come from
 
-The type of data, the formats and the size asked for each dataset take up one question of
-Science Europe's Practical Guide to the International Alignment of Research Data Management
-(Extended Edition, 2021, <https://doi.org/10.5281/zenodo.4915862>): "What data (for example the
-kinds, formats, and volumes) will be collected or produced?". The guidance shown under question 3 is
-the guide's, word for word. The three questions and the dataset fields on files,
-growth and storage were written for this form.
+The type of data and the formats asked for each dataset, and the storage space asked for the
+project, take up one question of Science Europe's Practical Guide to the International Alignment
+of Research Data Management (Extended Edition, 2021, <https://doi.org/10.5281/zenodo.4915862>):
+"What data (for example the kinds, formats, and volumes) will be collected or produced?". The
+guidance shown under question 3 is the guide's, word for word. The three questions and the fields
+on files, growth and storage were written for this form.
 
 ## How it is built
 

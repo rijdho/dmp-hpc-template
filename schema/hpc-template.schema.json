@@ -3,7 +3,7 @@
   "title": "hpc-template.json",
   "description": "The file the IT:U HPC data template writes: a project, its contact, its datasets and the answers to three questions. Empty values are left out, except answers.",
   "type": "object",
-  "required": ["format", "version", "created", "modified", "institution", "project", "contact", "datasets", "answers"],
+  "required": ["format", "version", "created", "modified", "institution", "project", "contact", "datasets", "storage", "answers"],
   "properties": {
     "format": { "type": "string", "enum": ["hpc-template"] },
     "version": { "type": "string", "description": "The version of the form that wrote the file." },
@@ -48,11 +48,6 @@
           "file_count": { "type": "integer", "description": "Roughly how many files." },
           "typical_file_size": { "type": "number" },
           "typical_file_size_unit": { "type": "string", "enum": ["KB", "MB", "GB", "TB"] },
-          "size": { "type": "number", "description": "Estimated size of the data, in the unit of size_unit." },
-          "size_unit": { "type": "string", "enum": ["GB", "TB", "PB"] },
-          "growth": { "type": "string", "enum": ["fixed", "growing"] },
-          "growth_per_year": { "type": "number", "description": "Growth per year, in the unit of growth_per_year_unit." },
-          "growth_per_year_unit": { "type": "string", "enum": ["GB", "TB", "PB"] },
           "storage_interface": { "type": "string", "enum": ["s3", "smb", "nfs", "parallel_fs", "block", "other"], "description": "The preferred storage format: S3, SMB, NFS, a parallel file system, block storage within a VM, or another." },
           "doi": { "type": "string", "description": "In lower case, without the resolver address." },
           "personal_data": { "type": "string", "enum": ["yes", "no", "unknown"] },
@@ -64,6 +59,17 @@
           "licence_url": { "type": "string", "format": "url" },
           "formats": { "type": "array", "items": { "type": "string" } }
         }
+      }
+    },
+    "storage": {
+      "type": "object",
+      "description": "The storage space the project needs on the cluster in total.",
+      "properties": {
+        "size": { "type": "number", "description": "In the unit of size_unit." },
+        "size_unit": { "type": "string", "enum": ["GB", "TB", "PB"] },
+        "growth": { "type": "string", "enum": ["fixed", "growing"] },
+        "growth_per_year": { "type": "number", "description": "In the unit of growth_per_year_unit." },
+        "growth_per_year_unit": { "type": "string", "enum": ["GB", "TB", "PB"] }
       }
     },
     "answers": {

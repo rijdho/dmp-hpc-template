@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 (2026-11-11)
+
+- The storage space is asked once, for the whole project, in a new block "Storage on the
+  cluster": how much space the project needs on the cluster in total, whether it is a fixed
+  amount or keeps growing, and by how much per year. The file carries it under `storage`.
+- The datasets no longer ask for their estimated size and growth. An `hpc-template.json` written
+  before loses those values when it is opened again.
+
 ## 0.2.3 (2026-11-11)
 
 - The units in the form are named in full, for example "GB (gigabytes)". The file and the

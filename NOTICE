@@ -21,5 +21,5 @@ The guidance under `q.tools.guide` in src/i18n/en.js is taken word for word from
   Science Europe (2021). Practical Guide to the International Alignment of Research Data
   Management (Extended Edition). Zenodo. https://doi.org/10.5281/zenodo.4915862
   licensed under CC BY 4.0.
-The dataset fields on the type of data, its formats and its size take up that guide's question on
+The dataset fields on the type of data and its formats, and the storage space of the project, take up that guide's question on
 the kinds, formats and volumes of data.

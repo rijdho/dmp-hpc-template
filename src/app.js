@@ -3,10 +3,10 @@
 // makes no network request.
 
 import {
-  DATASET_FIELDS, LICENCES, PROJECT_FIELDS, QUESTIONS, completeness, createDataset, createForm, getPath, licenceKey,
+  DATASET_FIELDS, LICENCES, PROJECT_FIELDS, QUESTIONS, STORAGE_FIELDS, completeness, createDataset, createForm, getPath, licenceKey,
   optionLabel, parseForm, setPath, stamp, toJson, toMarkdown, validateForm,
-} from './template.js?v=6';
-import { LANGS, getLang, resolveLang, setLang, t } from './i18n/index.js?v=26';
+} from './template.js?v=7';
+import { LANGS, getLang, resolveLang, setLang, t } from './i18n/index.js?v=27';
 
 const $ = (id) => document.getElementById(id);
 const KEY = { draft: 'dmp-hpc-template:draft', theme: 'dmp-hpc-template:theme' };
@@ -113,6 +113,11 @@ function changed() {
 function renderProject() {
   $('project').innerHTML = PROJECT_FIELDS
     .map((fd) => control(fd, `field.${fd.key}`, getPath(form, fd.path) ?? '', `id="p-${fd.key}" data-path="${fd.path}"`)).join('');
+}
+
+function renderStorage() {
+  $('storage').innerHTML = STORAGE_FIELDS
+    .map((fd) => control(fd, `field.${fd.key}`, getPath(form, fd.path) ?? '', `id="s-${fd.key}" data-path="${fd.path}"`)).join('');
 }
 
 function onProjectInput(e) {
@@ -272,6 +277,7 @@ function download(name, text, type) {
 function renderAll() {
   renderProject();
   renderDatasets();
+  renderStorage();
   renderQuestions();
   renderValidity();
 }
@@ -320,6 +326,8 @@ function init() {
   });
   $('project').addEventListener('input', onProjectInput);
   $('project').addEventListener('change', onProjectInput);
+  $('storage').addEventListener('input', onProjectInput);
+  $('storage').addEventListener('change', onProjectInput);
   $('datasets').addEventListener('input', onDatasetInput);
   $('datasets').addEventListener('change', onDatasetInput);
   $('datasets').addEventListener('click', onDatasetClick);

@@ -3,7 +3,7 @@
 // Management (Extended Edition, 2021, https://doi.org/10.5281/zenodo.4915862, CC BY 4.0), as
 // carried by the IT:U data management plan page; tests/page.test.mjs compares them with that
 // page's catalogue when it is present next to this folder. In the guidance, one line is one
-// bullet. The dataset fields on the type of data, its formats and its size take up the guide's
+// bullet. The dataset fields on the type of data and its formats, and the storage space of the project, take up the guide's
 // question "What data (for example the kinds, formats, and volumes) will be collected or produced?".
 // The strings this page shares with the IT:U data management plan page are copied from that
 // page's catalogue (see NOTICE).
@@ -11,7 +11,7 @@ export const en = {
   "ui.lang.aria": "Language",
   "ui.theme.title": "Toggle light/dark theme",
   "ui.theme.aria": "Toggle light/dark theme",
-  "meta.description": "A short form about the data of a project that uses high-performance computing at IT:U: the project, its datasets and three questions, downloaded as a document and as hpc-template.json.",
+  "meta.description": "A short form about the data of a project that uses high-performance computing at IT:U: the project, its datasets, the storage it needs on the cluster and three questions, downloaded as a document and as hpc-template.json.",
   "brand.name": "HPC data template",
   "nav.label": "View",
   "nav.form": "Fill in the template",
@@ -50,8 +50,8 @@ export const en = {
   "opt.origin.new": "Collecting new data in the project",
   "opt.origin.existing": "Using existing data from repositories",
   "opt.origin.both": "Both",
-  "opt.growth.fixed": "A fixed set",
-  "opt.growth.growing": "It keeps growing",
+  "opt.storage_growth.fixed": "A fixed amount",
+  "opt.storage_growth.growing": "It keeps growing",
   "opt.storage_interface.s3": "S3",
   "opt.storage_interface.smb": "SMB",
   "opt.storage_interface.nfs": "NFS",
@@ -83,11 +83,6 @@ export const en = {
   "ds.file_count": "Roughly how many files?",
   "ds.typical_file_size": "Typical file size",
   "ds.typical_file_size_unit": "Unit",
-  "ds.size": "Estimated size of the data",
-  "ds.size_unit": "Unit",
-  "ds.growth": "Is this a fixed set, or does it keep growing?",
-  "ds.growth_per_year": "If it grows, by how much per year?",
-  "ds.growth_per_year_unit": "Unit",
   "ds.storage_interface": "Preferred storage format (not all formats are supported yet)",
   "datasets.optional": "Publication (optional)",
   "ds.doi": "DOI, once reserved or assigned",
@@ -104,6 +99,14 @@ export const en = {
   "ds.licence_url": "Licence URL",
   "ds.formats": "Formats (MIME types, comma-separated)",
   "ds.formats.ph": "text/csv, application/json, image/tiff, video/mp4",
+
+  "storage.title": "Storage on the cluster",
+  "storage.lede": "The space the project needs on the cluster in total, for all its data and working files.",
+  "field.storage_size": "How much storage space do you need on the cluster in total?",
+  "field.storage_size_unit": "Unit",
+  "field.storage_growth": "Is this a fixed amount, or will it keep growing?",
+  "field.storage_growth_per_year": "If it grows, by how much per year?",
+  "field.storage_growth_per_year_unit": "Unit",
 
   "questions.title": "The three questions",
   "questions.count": "{a} of {n} answered",
@@ -142,8 +145,8 @@ export const en = {
   "md.unanswered": "Not answered yet.",
   "md.footer": "Written with the IT:U HPC data template, a draft prepared by DART. The guidance under question 3 comes from Science Europe, Practical Guide to the International Alignment of Research Data Management (Extended Edition, 2021, https://doi.org/10.5281/zenodo.4915862), CC BY 4.0. The same content as a file is hpc-template.json.",
 
-  "about.p1": "A short form about the data of a project that uses high-performance computing at IT:U, prepared by DART: the project, its datasets and three questions. It is a draft and has not been adopted as IT:U policy. It is separate from DART’s <a href=\"https://rijdho.github.io/dart-dmp-template/\" target=\"_blank\" rel=\"noreferrer\">data management plan template</a>, and its file, hpc-template.json, is not a plan in the RDA DMP Common Standard.",
-  "about.p2": "The type of data, the formats and the size asked for each dataset take up one question of Science Europe’s <a href=\"https://doi.org/10.5281/zenodo.4915862\" target=\"_blank\" rel=\"noreferrer\">Practical Guide to the International Alignment of Research Data Management</a> (Extended Edition, 2021): “What data (for example the kinds, formats, and volumes) will be collected or produced?”. The guidance under question 3 is the guide’s, word for word, used under CC BY 4.0. The three questions and the dataset fields on files, growth and storage were written for this form.",
+  "about.p1": "A short form about the data of a project that uses high-performance computing at IT:U, prepared by DART: the project, its datasets, the storage it needs on the cluster and three questions. It is a draft and has not been adopted as IT:U policy. It is separate from DART’s <a href=\"https://rijdho.github.io/dart-dmp-template/\" target=\"_blank\" rel=\"noreferrer\">data management plan template</a>, and its file, hpc-template.json, is not a plan in the RDA DMP Common Standard.",
+  "about.p2": "The type of data and the formats asked for each dataset, and the storage space asked for the project, take up one question of Science Europe’s <a href=\"https://doi.org/10.5281/zenodo.4915862\" target=\"_blank\" rel=\"noreferrer\">Practical Guide to the International Alignment of Research Data Management</a> (Extended Edition, 2021): “What data (for example the kinds, formats, and volumes) will be collected or produced?”. The guidance under question 3 is the guide’s, word for word, used under CC BY 4.0. The three questions and the fields on files, growth and storage were written for this form.",
   "about.p3": "The form is derived from the IT:U data management plan page, which is built on <a href=\"https://doi.org/10.5281/zenodo.23498569\" target=\"_blank\" rel=\"noreferrer\">Actionable DMP</a>. The code is under MIT; the texts are under CC BY 4.0. Nothing is tracked, no cookie is set, and the page loads nothing from anywhere but its own origin.",
   "foot.team": "DART · IT:U Interdisciplinary Transformation University Austria",
   "foot.licence": "Code under MIT, texts under CC BY 4.0",

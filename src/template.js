@@ -6,7 +6,7 @@
 // is not a plan in the RDA DMP Common Standard.
 
 export const FORMAT = 'hpc-template';
-export const VERSION = '0.2.3';
+export const VERSION = '0.3.0';
 
 /** Recorded in every new form. */
 export const INSTITUTION = Object.freeze({
@@ -48,11 +48,6 @@ export const DATASET_FIELDS = Object.freeze([
   { key: 'file_count', type: 'integer', wide: true },
   { key: 'typical_file_size', type: 'number', unit: 'typical_file_size_unit' },
   { key: 'typical_file_size_unit', type: 'enum', options: Object.freeze(['KB', 'MB', 'GB', 'TB']), unitOf: 'typical_file_size' },
-  { key: 'size', type: 'number', unit: 'size_unit' },
-  { key: 'size_unit', type: 'enum', options: SIZE_UNITS, unitOf: 'size' },
-  { key: 'growth', type: 'enum', options: Object.freeze(['', 'fixed', 'growing']), wide: true },
-  { key: 'growth_per_year', type: 'number', unit: 'growth_per_year_unit' },
-  { key: 'growth_per_year_unit', type: 'enum', options: SIZE_UNITS, unitOf: 'growth_per_year' },
   { key: 'storage_interface', type: 'enum', options: Object.freeze(['', 's3', 'smb', 'nfs', 'parallel_fs', 'block', 'other']), wide: true },
   { key: 'personal_data', type: 'enum', options: YES_NO },
   { key: 'sensitive_data', type: 'enum', options: YES_NO },
@@ -63,6 +58,18 @@ export const DATASET_FIELDS = Object.freeze([
   { key: 'repository', type: 'text', optional: true },
   { key: 'repository_url', type: 'url', optional: true },
   { key: 'licence_url', type: 'licence', optional: true },
+].map((f) => Object.freeze(f)));
+
+/**
+ * The fields on storage on the cluster, for the whole project, in the order shown. `path` is
+ * where the value sits in the file; types and units as for the dataset fields.
+ */
+export const STORAGE_FIELDS = Object.freeze([
+  { key: 'storage_size', path: 'storage.size', type: 'number', unit: 'storage_size_unit' },
+  { key: 'storage_size_unit', path: 'storage.size_unit', type: 'enum', options: SIZE_UNITS, unitOf: 'storage_size' },
+  { key: 'storage_growth', path: 'storage.growth', type: 'enum', options: Object.freeze(['', 'fixed', 'growing']), wide: true },
+  { key: 'storage_growth_per_year', path: 'storage.growth_per_year', type: 'number', unit: 'storage_growth_per_year_unit' },
+  { key: 'storage_growth_per_year_unit', path: 'storage.growth_per_year_unit', type: 'enum', options: SIZE_UNITS, unitOf: 'storage_growth_per_year' },
 ].map((f) => Object.freeze(f)));
 
 /**
@@ -113,7 +120,7 @@ const now = () => new Date().toISOString().replace(/\.\d+Z$/, 'Z');
 export function createDataset() {
   return {
     title: '', type: '', origin: '', description: '', file_count: '', typical_file_size: '', typical_file_size_unit: 'MB',
-    size: '', size_unit: 'GB', growth: '', growth_per_year: '', growth_per_year_unit: 'GB', storage_interface: '',
+    storage_interface: '',
     personal_data: 'no', sensitive_data: 'unknown', data_access: 'open', formats: [],
     doi: '', issued: '', repository: '', repository_url: '', licence_url: '',
   };
@@ -131,6 +138,7 @@ export function createForm() {
     project: { title: '', ethical_issues: 'unknown', start: '', end: '', data_steward_after_end: '', funder_name: '' },
     contact: { name: '', mbox: '', orcid: '' },
     datasets: [createDataset()],
+    storage: { size: '', size_unit: 'GB', growth: '', growth_per_year: '', growth_per_year_unit: 'GB' },
     answers: Object.fromEntries(QUESTION_IDS.map((id) => [id, ''])),
   };
 }
@@ -211,6 +219,10 @@ export function validateForm(form) {
     const code = formatProblem(f.type, value);
     if (code) out.push({ severity: 'error', code, field: f.key });
   }
+  for (const f of STORAGE_FIELDS) {
+    const code = formatProblem(f.type, getPath(form, f.path));
+    if (code) out.push({ severity: 'error', code, field: f.key });
+  }
   const { start, end } = form.project ?? {};
   if (realDate(start) && realDate(end) && end < start) out.push({ severity: 'error', code: 'val.endBeforeStart', field: 'end' });
   const datasets = Array.isArray(form.datasets) ? form.datasets : [];
@@ -235,13 +247,19 @@ export function completeness(form) {
 
 const text = (v) => String(v ?? '').trim();
 
-/** One dataset value as the file carries it; an empty string means the file leaves it out. */
-function fileValue(ds, f) {
-  if (f.type === 'list') return (ds[f.key] ?? []).map(text).filter(Boolean);
-  if (f.type === 'number' || f.type === 'integer') return formatProblem(f.type, ds[f.key]) || !filled(ds[f.key]) ? '' : Number(text(ds[f.key]));
-  if (f.unitOf) return fileValue(ds, DATASET_FIELDS.find((x) => x.key === f.unitOf)) === '' ? '' : ds[f.key];
-  return text(ds[f.key]);
+/**
+ * One value as the file carries it; an empty string means the file leaves it out. `get` reads
+ * the value of a field, and `fields` is the list the field belongs to, where its number is found.
+ */
+function fileValue(get, f, fields) {
+  const v = get(f);
+  if (f.type === 'list') return (v ?? []).map(text).filter(Boolean);
+  if (f.type === 'number' || f.type === 'integer') return formatProblem(f.type, v) || !filled(v) ? '' : Number(text(v));
+  if (f.unitOf) return fileValue(get, fields.find((x) => x.key === f.unitOf), fields) === '' ? '' : v;
+  return text(v);
 }
+
+const fileKey = (f) => f.path.split('.').at(-1);
 
 /**
  * The form as it is written to hpc-template.json: text trimmed, empty values left out, the
@@ -266,9 +284,10 @@ export function toFile(form) {
     }),
     contact: prune({ name: text(c.name), mbox: text(c.mbox), orcid: normaliseOrcid(c.orcid) }),
     datasets: (form.datasets ?? []).map((ds) => prune({
-      ...Object.fromEntries(DATASET_FIELDS.map((f) => [f.key, fileValue(ds, f)])),
+      ...Object.fromEntries(DATASET_FIELDS.map((f) => [f.key, fileValue((x) => ds[x.key], f, DATASET_FIELDS)])),
       doi: normaliseDoi(ds.doi),
     })),
+    storage: prune(Object.fromEntries(STORAGE_FIELDS.map((f) => [fileKey(f), fileValue((x) => getPath(form, x.path), f, STORAGE_FIELDS)]))),
     answers: Object.fromEntries(QUESTION_IDS.map((id) => [id, text(form.answers?.[id])])),
   };
 }
@@ -306,15 +325,19 @@ export function parseForm(source) {
     }
     return ds;
   });
+  for (const f of STORAGE_FIELDS) {
+    const v = getPath(data, f.path);
+    if (f.type === 'enum') { if (f.options.includes(v)) setPath(form, f.path, v); } else setPath(form, f.path, typeof v === 'number' ? String(v) : '');
+  }
   for (const id of QUESTION_IDS) form.answers[id] = str(data.answers?.[id]);
   return { form };
 }
 
 // ── the document ─────────────────────────────────────────────────────────────
 
-const OWN_OPTIONS = ['origin', 'data_access', 'growth', 'storage_interface'];
+const OWN_OPTIONS = ['origin', 'data_access', 'storage_growth', 'storage_interface'];
 
-/** The catalogue key of an enum value: four dataset fields have their own, the rest share yes, no and unknown. */
+/** The catalogue key of an enum value: four fields have their own, the rest share yes, no and unknown. */
 export const optionKey = (fieldKey, value) =>
   (value === '' ? 'opt.unset' : OWN_OPTIONS.includes(fieldKey) ? `opt.${fieldKey}.${value}` : `opt.${value}`);
 
@@ -353,6 +376,15 @@ export function toMarkdown(form, t) {
     }
     lines.push('');
   });
+
+  lines.push(`## ${t('storage.title')}`, '', `| ${t('md.field')} | ${t('md.value')} |`, '|---|---|');
+  for (const f of STORAGE_FIELDS) {
+    if (f.unitOf) continue;
+    const v = file.storage[fileKey(f)];
+    const unit = f.unit && v !== undefined ? ` ${file.storage[fileKey(STORAGE_FIELDS.find((x) => x.key === f.unit))]}` : '';
+    row(t(`field.${f.key}`), f.type === 'enum' && v ? optionLabel(f, v, t) : v === undefined ? '' : `${v}${unit}`);
+  }
+  lines.push('');
 
   lines.push(`## ${t('questions.title')}`, '');
   QUESTION_IDS.forEach((id, i) => {

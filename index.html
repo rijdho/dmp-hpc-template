@@ -17,7 +17,7 @@
   <meta name="referrer" content="no-referrer" />
   <title>IT:U HPC data template</title>
   <meta name="description" data-i18n-attr="content:meta.description"
-        content="A short form about the data of a project that uses high-performance computing at IT:U: the project, its datasets and three questions, downloaded as a document and as hpc-template.json." />
+        content="A short form about the data of a project that uses high-performance computing at IT:U: the project, its datasets, the storage it needs on the cluster and three questions, downloaded as a document and as hpc-template.json." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%236d4aff'/%3E%3Ctext x='16' y='21' font-size='11' text-anchor='middle' fill='%23ffffff' font-family='monospace' font-weight='bold'%3EHPC%3C/text%3E%3C/svg%3E" />
   <link rel="stylesheet" href="./style.css?v=1" />
   <script src="./src/theme-boot.js?v=1"></script>
@@ -43,7 +43,7 @@
           <span data-i18n="foot.team">DART · IT:U Interdisciplinary Transformation University Austria</span><br />
           <span data-i18n="foot.licence">Code under MIT, texts under CC BY 4.0</span><br />
           <a href="https://github.com/rijdho/dmp-hpc-template" target="_blank" rel="noreferrer" data-i18n="foot.source">Source on GitHub</a><br />
-          <span id="version">0.2.3</span>
+          <span id="version">0.3.0</span>
         </p>
       </div>
     </aside>
@@ -92,6 +92,12 @@
               <button class="btn" id="add-dataset" type="button" data-i18n="datasets.add">Add a dataset</button>
             </div>
 
+            <section class="panel">
+              <h2 class="panel-title" data-i18n="storage.title">Storage on the cluster</h2>
+              <p class="hint toolbar-hint" data-i18n="storage.lede"></p>
+              <div class="grid2" id="storage"></div>
+            </section>
+
             <div class="reqs-head">
               <h2 class="panel-title" data-i18n="questions.title">The three questions</h2>
               <span class="muted mono" id="q-count"></span>
@@ -119,6 +125,6 @@
       </main>
     </div>
   </div>
-  <script type="module" src="./src/app.js?v=6"></script>
+  <script type="module" src="./src/app.js?v=7"></script>
 </body>
 </html>

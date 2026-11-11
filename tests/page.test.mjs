@@ -29,6 +29,10 @@ function keysUsed() {
     // A field's `path` is a place in the file, not a key of the catalogue.
     for (const m of src.matchAll(/(?<!path: )'((?:form|md|val|valid|complete|parse|about|nav|ui|ds|opt|q|field|foot|meta|dl|project|datasets|questions|brand)\.[A-Za-z0-9_.]*[A-Za-z0-9_])'/g)) used.add(m[1]);
   for (const q of T.QUESTIONS) { used.add(`q.${q.id}`); if (q.guide) used.add(`q.${q.id}.guide`); }
+  for (const f of T.STORAGE_FIELDS) {
+    used.add(`field.${f.key}`);
+    for (const o of f.options ?? []) used.add(f.unitOf ? T.unitKey(o) : T.optionKey(f.key, o));
+  }
   for (const f of T.PROJECT_FIELDS) {
     used.add(`field.${f.key}`);
     for (const o of f.options ?? []) used.add(T.optionKey(f.key, o));
@@ -63,30 +67,34 @@ function filledForm() {
   Object.assign(form.contact, { name: 'Test Person', mbox: 'test@example.org', orcid: '0000-0002-1825-0097' });
   Object.assign(form.datasets[0], {
     title: 'Simulation output', type: 'dataset', origin: 'new', description: 'Runs of a model.',
-    file_count: '120000', typical_file_size: '2.5', typical_file_size_unit: 'GB', size: '300', size_unit: 'TB',
-    growth: 'growing', growth_per_year: '40', growth_per_year_unit: 'TB', storage_interface: 'parallel_fs',
+    file_count: '120000', typical_file_size: '2.5', typical_file_size_unit: 'GB', storage_interface: 'parallel_fs',
     doi: 'https://doi.org/10.5281/ZENODO.1234567', issued: '2028-06-30', repository: 'Zenodo',
     repository_url: 'https://zenodo.org', licence_url: 'https://creativecommons.org/licenses/by/4.0/', formats: ['text/csv'],
   });
+  Object.assign(form.storage, { size: '300', size_unit: 'TB', growth: 'growing', growth_per_year: '40', growth_per_year_unit: 'TB' });
   for (const id of T.QUESTION_IDS) form.answers[id] = `Answer to ${id}.`;
   return form;
 }
 
-test('the form has the nine project fields, the twenty-two dataset fields and the three questions', () => {
+test('the form has the nine project fields, the seventeen dataset fields, the five storage fields and the three questions', () => {
   assert.deepEqual(T.PROJECT_FIELDS.map((f) => f.key),
     ['project_title', 'contact_name', 'contact_mbox', 'contact_orcid', 'ethical_issues', 'start', 'end', 'steward_after_end', 'funder_name']);
   assert.deepEqual(T.DATASET_FIELDS.filter((f) => !f.optional).map((f) => f.key), [
-    'title', 'type', 'origin', 'description', 'file_count', 'typical_file_size', 'typical_file_size_unit', 'size', 'size_unit',
-    'growth', 'growth_per_year', 'growth_per_year_unit', 'storage_interface', 'personal_data', 'sensitive_data', 'data_access', 'formats']);
+    'title', 'type', 'origin', 'description', 'file_count', 'typical_file_size', 'typical_file_size_unit', 'storage_interface', 'personal_data', 'sensitive_data', 'data_access', 'formats']);
   assert.deepEqual(T.DATASET_FIELDS.filter((f) => f.optional).map((f) => f.key), ['doi', 'issued', 'repository', 'repository_url', 'licence_url']);
-  for (const f of T.DATASET_FIELDS.filter((x) => x.unit)) assert.equal(T.DATASET_FIELDS.find((x) => x.key === f.unit).unitOf, f.key);
+  assert.deepEqual(T.STORAGE_FIELDS.map((f) => f.path),
+    ['storage.size', 'storage.size_unit', 'storage.growth', 'storage.growth_per_year', 'storage.growth_per_year_unit']);
+  for (const list of [T.DATASET_FIELDS, T.STORAGE_FIELDS])
+    for (const f of list.filter((x) => x.unit)) assert.equal(list.find((x) => x.key === f.unit).unitOf, f.key);
   assert.deepEqual(T.QUESTION_IDS, ['retention', 'access', 'tools']);
 });
 
-test('a new dataset has no type, sizes in GB, named in full on the page, and no personal data', () => {
+test('a new form asks for storage in GB, named in full on the page; a new dataset has no type and no personal data', () => {
   const ds = T.createDataset();
-  assert.deepEqual([ds.type, ds.size_unit, ds.growth_per_year_unit, ds.personal_data], ['', 'GB', 'GB', 'no']);
-  const unit = T.DATASET_FIELDS.find((f) => f.key === 'size_unit');
+  assert.deepEqual([ds.type, ds.personal_data], ['', 'no']);
+  const { storage } = T.createForm();
+  assert.deepEqual([storage.size_unit, storage.growth_per_year_unit], ['GB', 'GB']);
+  const unit = T.STORAGE_FIELDS.find((f) => f.key === 'storage_size_unit');
   assert.equal(T.optionLabel(unit, 'GB', (k) => en[k]), 'GB (gigabytes)');
 });
 
@@ -106,11 +114,11 @@ test('the file of a filled form and the file of an empty one both agree with the
 
 test('the schema names every property the file can carry, and no other', () => {
   const file = T.toFile(filledForm());
-  for (const part of ['project', 'contact', 'answers'])
+  for (const part of ['project', 'contact', 'storage', 'answers'])
     assert.deepEqual(Object.keys(file[part]).sort(), Object.keys(schema.properties[part].properties).sort(), part);
   assert.deepEqual(Object.keys(file.datasets[0]).sort(), Object.keys(schema.properties.datasets.items.properties).sort());
   assert.deepEqual(Object.keys(file).sort(), Object.keys(schema.properties).sort());
-  for (const f of [...T.PROJECT_FIELDS, ...T.DATASET_FIELDS].filter((x) => x.type === 'enum')) {
+  for (const f of [...T.PROJECT_FIELDS, ...T.STORAGE_FIELDS, ...T.DATASET_FIELDS].filter((x) => x.type === 'enum')) {
     const node = f.path ? f.path.split('.').reduce((n, k) => n.properties[k], schema) : schema.properties.datasets.items.properties[f.key];
     assert.deepEqual(node.enum, f.options.filter(Boolean), f.key);
   }
@@ -133,15 +141,17 @@ test('the file carries the ORCID iD as its URL and the DOI in lower case without
 });
 
 test('the file carries numbers as numbers, and a unit only next to its number', () => {
-  const ds = T.toFile(filledForm()).datasets[0];
-  assert.deepEqual([ds.file_count, ds.typical_file_size, ds.typical_file_size_unit, ds.size, ds.size_unit, ds.growth_per_year, ds.growth_per_year_unit],
-    [120000, 2.5, 'GB', 300, 'TB', 40, 'TB']);
-  const empty = T.toFile(T.createForm()).datasets[0];
-  for (const k of ['file_count', 'typical_file_size', 'typical_file_size_unit', 'size', 'size_unit', 'growth', 'growth_per_year', 'growth_per_year_unit', 'storage_interface'])
-    assert.ok(!(k in empty), k);
+  const file = T.toFile(filledForm());
+  const ds = file.datasets[0];
+  assert.deepEqual([ds.file_count, ds.typical_file_size, ds.typical_file_size_unit], [120000, 2.5, 'GB']);
+  assert.deepEqual(file.storage, { size: 300, size_unit: 'TB', growth: 'growing', growth_per_year: 40, growth_per_year_unit: 'TB' });
+  const empty = T.toFile(T.createForm());
+  for (const k of ['file_count', 'typical_file_size', 'typical_file_size_unit', 'storage_interface'])
+    assert.ok(!(k in empty.datasets[0]), k);
+  assert.deepEqual(empty.storage, {});
   const zero = T.createForm();
-  zero.datasets[0].growth_per_year = '0';
-  assert.equal(T.toFile(zero).datasets[0].growth_per_year, 0);
+  zero.storage.growth_per_year = '0';
+  assert.deepEqual(T.toFile(zero).storage, { growth_per_year: 0, growth_per_year_unit: 'GB' });
 });
 
 test('wrong values are reported, each under its field', () => {
@@ -153,14 +163,14 @@ test('wrong values are reported, each under its field', () => {
   form.datasets[0].repository_url = 'zenodo.org';
   form.datasets[0].issued = '2028-02-30';
   form.datasets[0].file_count = '1.5';
-  form.datasets[0].size = '-3';
+  form.storage.size = '-3';
   const found = T.validateForm(form).map((p) => `${p.severity} ${p.code} ${p.field}`);
   assert.deepEqual(found, [
-    'error val.email contact_mbox', 'error val.orcid contact_orcid', 'error val.endBeforeStart end',
-    'error val.integer file_count', 'error val.number size', 'error val.doi doi', 'error val.date issued', 'error val.url repository_url',
+    'error val.email contact_mbox', 'error val.orcid contact_orcid', 'error val.number storage_size', 'error val.endBeforeStart end',
+    'error val.integer file_count', 'error val.doi doi', 'error val.date issued', 'error val.url repository_url',
   ]);
-  const file = T.toFile(form).datasets[0];
-  assert.ok(!('file_count' in file) && !('size' in file) && !('size_unit' in file));
+  const file = T.toFile(form);
+  assert.ok(!('file_count' in file.datasets[0]) && !('size' in file.storage) && !('size_unit' in file.storage));
 });
 
 test('an ORCID iD is accepted with or without its address, and only with the right check character', () => {
@@ -176,11 +186,11 @@ test('a file that is not an hpc-template.json is refused, each kind with its mes
   assert.equal(T.parseForm('{"dmp":{"title":"A plan"}}').error, 'parse.otherFormat');
 });
 
-test('the document carries every answer and the twelve filled values it is searched for, and no untranslated key', () => {
+test('the document carries every answer and the thirteen filled values it is searched for, and no untranslated key', () => {
   const md = T.toMarkdown(filledForm(), t);
   for (const id of T.QUESTION_IDS) assert.ok(md.includes(`Answer to ${id}.`), id);
   for (const s of ['A test project', 'The research group', 'A funder', 'Simulation output', 'Collecting new data in the project', '10.5281/zenodo.1234567', 'text/csv',
-    '| 120000 |', '| 2.5 GB |', '| 300 TB |', '| 40 TB |', 'Parallel file system'])
+    '| 120000 |', '| 2.5 GB |', '| 300 TB |', '| 40 TB |', 'It keeps growing', 'Parallel file system'])
     assert.ok(md.includes(s), s);
   assert.doesNotMatch(md, /\b(?:md|q|field|opt|val|ds|form|project|datasets|questions)\.[a-z0-9_]+(?:\.[a-z0-9_]+)*\b(?!\.\w)/i);
   assert.match(T.toMarkdown(T.createForm(), t), /Not answered yet\./);

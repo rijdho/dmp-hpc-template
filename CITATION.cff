@@ -3,7 +3,8 @@ message: "If you use this template, please cite it."
 title: "dmp-hpc-template: a short form about the data of projects that use high-performance computing at IT:U"
 abstract: >-
   A page for describing the data of a project that uses high-performance
-  computing at IT:U: the project, its datasets and three questions. The form is
+  computing at IT:U: the project, its datasets, the storage it needs on the
+  cluster and three questions. The form is
   downloaded as a document and as hpc-template.json, a format of its own. It is
   a draft prepared by DART and has not been adopted as IT:U policy. Derived
   from the IT:U data management plan page, which is built on Actionable DMP.
@@ -17,7 +18,7 @@ authors:
 url: "https://rijdho.github.io/dmp-hpc-template/"
 repository-code: "https://github.com/rijdho/dmp-hpc-template"
 license: MIT
-version: "0.2.3"
+version: "0.3.0"
 date-released: "2026-11-11"
 keywords:
   - research data management

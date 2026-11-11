@@ -1,13 +1,13 @@
 # Next
 
-State on 2026-11-11: version 0.2.3, a draft. The repository is
+State on 2026-11-11: version 0.3.0, a draft. The repository is
 <https://github.com/rijdho/dmp-hpc-template>; the page is published at
 <https://rijdho.github.io/dmp-hpc-template/> (GitHub Pages, branch `main`, root) since 2026-11-11.
 
 ## What exists
 
-- The page (`index.html`): the project box, the datasets with their fields on files, size, growth
-  and storage, the three questions and two downloads (`hpc-template.md`, `hpc-template.json`).
+- The page (`index.html`): the project box, the datasets with their fields on files and storage
+  format, the storage the project needs on the cluster (total, growth), the three questions and two downloads (`hpc-template.md`, `hpc-template.json`).
 - `schema/hpc-template.schema.json`, the description of the file.
 - Nineteen tests in `tests/page.test.mjs`, all passing on 2026-11-11.
 - Tried in a browser on 2026-11-11 from a local server: the fields with their units, the folded
@@ -45,12 +45,16 @@ State on 2026-11-11: version 0.2.3, a draft. The repository is
   the dataset fields on type and formats ask the same; three questions remain. The examples that
   stood under question 1 are now under the type of data. Question 3 asks whether proprietary software or tools are needed, in place of Science Europe's
   question on methods and tools; of its guidance only the line on tools stays. The units are named in full in the form ("GB (gigabytes)"), and kept short in the file and the
-  document. The catalogue is loaded as `en.js?v=26`.
+  document.
+- Christoph Arthofer asked the same day for one total of the space a project needs on the
+  cluster. The estimated size and the growth moved from each dataset to a block for the whole
+  project, "Storage on the cluster" (0.3.0); the number and typical size of files and the storage
+  format stay per dataset. The catalogue is loaded as `en.js?v=27`.
 
 ## Open decisions
 
 - `src/i18n/index.js` was copied from the data management plan page and differs from it since
-  2026-11-11 in one line, the address of the catalogue (`en.js?v=26`). A change to the texts
+  2026-11-11 in one line, the address of the catalogue (`en.js?v=27`). A change to the texts
   reaches a browser that cached them only if that address changes; the same holds for
   `template.js` and `app.js`.
 - Whether IT:U guidance (storage on the cluster, retention periods) is added under the
