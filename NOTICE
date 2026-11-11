@@ -1,0 +1,26 @@
+dmp-hpc-template (IT:U HPC data template)
+Copyright 2026 Ricardo Hartley, IT:U Interdisciplinary Transformation University Austria
+
+The code written for this page (src/template.js, tests/page.test.mjs) is licensed under the MIT
+License (LICENSE). The texts (the interface strings in src/i18n/en.js, the schema and the
+documentation) are licensed under the Creative Commons Attribution 4.0 International License
+(CC BY 4.0): https://creativecommons.org/licenses/by/4.0/
+
+From dart-dmp-template, the IT:U data management plan page (copyright 2026 Ricardo Hartley,
+IT:U; MIT License), at its commit 4fd0052:
+  index.html, style.css, src/app.js, src/theme-boot.js   adapted
+
+From Actionable DMP (dmp-template), copyright 2026 Ricardo Hartley Belmar,
+https://doi.org/10.5281/zenodo.23498569, as copied into dart-dmp-template from its commit 86eff52:
+  src/i18n/index.js, tests/lib/jsonschema.js   unchanged (MIT License)
+  the list of licences in src/template.js     (MIT License)
+Labels of the dataset fields and several messages in src/i18n/en.js are taken from its catalogue
+(CC BY 4.0).
+
+The question under `q.tools` and the guidance under `q.kinds.guide`, `q.formats.guide` and
+`q.tools.guide` in src/i18n/en.js are taken word for word from:
+  Science Europe (2021). Practical Guide to the International Alignment of Research Data
+  Management (Extended Edition). Zenodo. https://doi.org/10.5281/zenodo.4915862
+  licensed under CC BY 4.0.
+The questions under `q.kinds` and `q.formats` take up the first two parts of that guide's question
+on the kinds, formats and volumes of data.

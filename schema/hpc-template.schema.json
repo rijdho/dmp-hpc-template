@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "hpc-template.json",
+  "description": "The file the IT:U HPC data template writes: a project, its contact, its datasets and the answers to five questions. Empty values are left out, except answers.",
+  "type": "object",
+  "required": ["format", "version", "created", "modified", "institution", "project", "contact", "datasets", "answers"],
+  "properties": {
+    "format": { "type": "string", "enum": ["hpc-template"] },
+    "version": { "type": "string", "description": "The version of the form that wrote the file." },
+    "created": { "type": "string", "format": "date-time" },
+    "modified": { "type": "string", "format": "date-time" },
+    "institution": {
+      "type": "object",
+      "required": ["name", "ror"],
+      "properties": {
+        "name": { "type": "string" },
+        "ror": { "type": "string", "format": "url" }
+      }
+    },
+    "project": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "ethical_issues": { "type": "string", "enum": ["yes", "no", "unknown"] },
+        "start": { "type": "string", "format": "date" },
+        "end": { "type": "string", "format": "date" },
+        "data_steward_after_end": { "type": "string", "description": "Who will take care of the data after the project ends." },
+        "funder_name": { "type": "string" }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "mbox": { "type": "string", "format": "email" },
+        "orcid": { "type": "string", "format": "url", "description": "The ORCID iD as its URL." }
+      }
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "type": { "type": "string" },
+          "origin": { "type": "string", "enum": ["new", "existing", "both"], "description": "Whether the project collects new data, uses existing data from repositories, or both." },
+          "description": { "type": "string" },
+          "file_count": { "type": "integer", "description": "Roughly how many files." },
+          "typical_file_size": { "type": "number" },
+          "typical_file_size_unit": { "type": "string", "enum": ["KB", "MB", "GB", "TB"] },
+          "size": { "type": "number", "description": "Estimated size of the data, in the unit of size_unit." },
+          "size_unit": { "type": "string", "enum": ["GB", "TB", "PB"] },
+          "growth": { "type": "string", "enum": ["fixed", "growing"] },
+          "growth_per_year": { "type": "number", "description": "Growth per year, in the unit of growth_per_year_unit." },
+          "growth_per_year_unit": { "type": "string", "enum": ["GB", "TB", "PB"] },
+          "storage_interface": { "type": "string", "enum": ["s3", "smb", "nfs", "parallel_fs", "block", "other"], "description": "The preferred storage format: S3, SMB, NFS, a parallel file system, block storage within a VM, or another." },
+          "doi": { "type": "string", "description": "In lower case, without the resolver address." },
+          "personal_data": { "type": "string", "enum": ["yes", "no", "unknown"] },
+          "sensitive_data": { "type": "string", "enum": ["yes", "no", "unknown"] },
+          "data_access": { "type": "string", "enum": ["open", "shared", "closed"] },
+          "issued": { "type": "string", "format": "date" },
+          "repository": { "type": "string" },
+          "repository_url": { "type": "string", "format": "url" },
+          "licence_url": { "type": "string", "format": "url" },
+          "formats": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "answers": {
+      "type": "object",
+      "required": ["kinds", "formats", "retention", "access", "tools"],
+      "properties": {
+        "kinds": { "type": "string" },
+        "formats": { "type": "string" },
+        "retention": { "type": "string" },
+        "access": { "type": "string" },
+        "tools": { "type": "string" }
+      }
+    }
+  }
+}
