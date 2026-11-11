@@ -13,8 +13,10 @@ State on 2026-11-11: version 0.1.0, a first draft. The repository is
 - Tried in a browser on 2026-11-11 from a local server: the fields with their units, the folded
   publication fields, the two downloads, opening the downloaded file again, Start over and
   removing a dataset with two clicks worked, and the policy blocked a request to another host,
-  an external stylesheet, an external image and an inline script. The dark theme and a narrow
-  window were not looked at.
+  an external stylesheet, an external image and an inline script.
+- Looked at on the published page on 2026-11-11 in the dark theme (1280 px wide: the project box,
+  a dataset with its folded fields open, the questions) and in a window 390 px wide (dark and
+  light: the form, a dataset, About): nothing wider than the window, text inside its boxes.
 - Tried on the published page on 2026-11-11: the fields, the two downloads and opening the
   downloaded file again worked, and the policy blocked a request to another host, an external
   stylesheet and an inline script.
