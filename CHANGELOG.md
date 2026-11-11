@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.3 (2026-11-11)
+
+- The units in the form are named in full, for example "GB (gigabytes)". The file and the
+  document keep the short form (GB).
+
 ## 0.2.2 (2026-11-11)
 
 - The guidance under question 3 keeps only its line on the tools needed; the line on how the

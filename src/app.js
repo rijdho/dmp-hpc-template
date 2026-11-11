@@ -5,8 +5,8 @@
 import {
   DATASET_FIELDS, LICENCES, PROJECT_FIELDS, QUESTIONS, completeness, createDataset, createForm, getPath, licenceKey,
   optionLabel, parseForm, setPath, stamp, toJson, toMarkdown, validateForm,
-} from './template.js?v=5';
-import { LANGS, getLang, resolveLang, setLang, t } from './i18n/index.js?v=25';
+} from './template.js?v=6';
+import { LANGS, getLang, resolveLang, setLang, t } from './i18n/index.js?v=26';
 
 const $ = (id) => document.getElementById(id);
 const KEY = { draft: 'dmp-hpc-template:draft', theme: 'dmp-hpc-template:theme' };

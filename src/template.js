@@ -6,7 +6,7 @@
 // is not a plan in the RDA DMP Common Standard.
 
 export const FORMAT = 'hpc-template';
-export const VERSION = '0.2.2';
+export const VERSION = '0.2.3';
 
 /** Recorded in every new form. */
 export const INSTITUTION = Object.freeze({
@@ -318,8 +318,11 @@ const OWN_OPTIONS = ['origin', 'data_access', 'growth', 'storage_interface'];
 export const optionKey = (fieldKey, value) =>
   (value === '' ? 'opt.unset' : OWN_OPTIONS.includes(fieldKey) ? `opt.${fieldKey}.${value}` : `opt.${value}`);
 
-/** The label of an enum value. A unit is its own label and has no entry in the catalogue. */
-export const optionLabel = (fd, value, t) => (fd.unitOf ? value : t(optionKey(fd.key, value)));
+/** The catalogue key of a unit; its label names the unit in full ("GB (gigabytes)"). The file keeps the unit as it is. */
+export const unitKey = (value) => `unit.${value}`;
+
+/** The label of an enum value. */
+export const optionLabel = (fd, value, t) => t(fd.unitOf ? unitKey(value) : optionKey(fd.key, value));
 
 const cell = (s) => String(s).replace(/\|/g, '\\|').replace(/\s*\n\s*/g, ' ');
 

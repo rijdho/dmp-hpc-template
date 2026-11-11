@@ -35,7 +35,7 @@ function keysUsed() {
   }
   for (const f of T.DATASET_FIELDS) {
     used.add(`ds.${f.key}`);
-    if (!f.unitOf) for (const o of f.options ?? []) used.add(T.optionKey(f.key, o));
+    for (const o of f.options ?? []) used.add(f.unitOf ? T.unitKey(o) : T.optionKey(f.key, o));
   }
   return used;
 }
@@ -83,9 +83,11 @@ test('the form has the nine project fields, the twenty-two dataset fields and th
   assert.deepEqual(T.QUESTION_IDS, ['retention', 'access', 'tools']);
 });
 
-test('a new dataset has no type, sizes in GB and no personal data', () => {
+test('a new dataset has no type, sizes in GB, named in full on the page, and no personal data', () => {
   const ds = T.createDataset();
   assert.deepEqual([ds.type, ds.size_unit, ds.growth_per_year_unit, ds.personal_data], ['', 'GB', 'GB', 'no']);
+  const unit = T.DATASET_FIELDS.find((f) => f.key === 'size_unit');
+  assert.equal(T.optionLabel(unit, 'GB', (k) => en[k]), 'GB (gigabytes)');
 });
 
 test('a new form records IT:U with its ROR ID, and is not yet complete', () => {

@@ -61,6 +61,11 @@ export const en = {
   "opt.data_access.open": "Open",
   "opt.data_access.shared": "Shared on conditions",
   "opt.data_access.closed": "Closed",
+  "unit.KB": "KB (kilobytes)",
+  "unit.MB": "MB (megabytes)",
+  "unit.GB": "GB (gigabytes)",
+  "unit.TB": "TB (terabytes)",
+  "unit.PB": "PB (petabytes)",
   "opt.licence.other": "Another licence (type its URL)",
 
   "datasets.title": "Datasets",
