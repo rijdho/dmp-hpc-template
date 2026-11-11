@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- The README, `CITATION.cff` and `NEXT.md` name the published page.
+
 ## 0.1.0 (2026-11-11)
 
 First version, a draft for discussion.

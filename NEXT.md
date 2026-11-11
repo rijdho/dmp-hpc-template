@@ -1,8 +1,8 @@
 # Next
 
-State on 2026-11-11: version 0.1.0, a first draft. The repository is to be
-<https://github.com/rijdho/dmp-hpc-template>, public, as for the data management plan page. It is
-not published yet.
+State on 2026-11-11: version 0.1.0, a first draft. The repository is
+<https://github.com/rijdho/dmp-hpc-template>; the page is published at
+<https://rijdho.github.io/dmp-hpc-template/> (GitHub Pages, branch `main`, root) since 2026-11-11.
 
 ## What exists
 
@@ -15,6 +15,9 @@ not published yet.
   removing a dataset with two clicks worked, and the policy blocked a request to another host,
   an external stylesheet, an external image and an inline script. The dark theme and a narrow
   window were not looked at.
+- Tried on the published page on 2026-11-11: the fields, the two downloads and opening the
+  downloaded file again worked, and the policy blocked a request to another host, an external
+  stylesheet and an inline script.
 
 ## Decided on 2026-11-11
 

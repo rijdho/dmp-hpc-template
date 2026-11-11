@@ -7,6 +7,8 @@ It is separate from the IT:U data management plan page (`dart-dmp-template`), fr
 derived: it asks less, and its file, `hpc-template.json`, is a format of its own and not a plan
 in the RDA DMP Common Standard.
 
+Live: <https://rijdho.github.io/dmp-hpc-template/>
+
 Repository: <https://github.com/rijdho/dmp-hpc-template>.
 
 Language: English.
