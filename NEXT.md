@@ -1,6 +1,6 @@
 # Next
 
-State on 2026-11-11: version 0.1.0, a first draft. The repository is
+State on 2026-11-11: version 0.2.0, a draft. The repository is
 <https://github.com/rijdho/dmp-hpc-template>; the page is published at
 <https://rijdho.github.io/dmp-hpc-template/> (GitHub Pages, branch `main`, root) since 2026-11-11.
 

@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.2.0 (2026-11-11)
 
 - The README, `CITATION.cff` and `NEXT.md` name the published page.
 - The introduction says what the answers are for and asks for both downloads to be sent to

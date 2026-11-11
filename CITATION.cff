@@ -17,7 +17,7 @@ authors:
 url: "https://rijdho.github.io/dmp-hpc-template/"
 repository-code: "https://github.com/rijdho/dmp-hpc-template"
 license: MIT
-version: "0.1.0"
+version: "0.2.0"
 date-released: "2026-11-11"
 keywords:
   - research data management
