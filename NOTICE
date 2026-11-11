@@ -17,8 +17,7 @@ https://doi.org/10.5281/zenodo.23498569, as copied into dart-dmp-template from i
 Labels of the dataset fields and several messages in src/i18n/en.js are taken from its catalogue
 (CC BY 4.0).
 
-The question under `q.tools` and the guidance under `q.tools.guide` in src/i18n/en.js are taken
-word for word from:
+The guidance under `q.tools.guide` in src/i18n/en.js is taken word for word from:
   Science Europe (2021). Practical Guide to the International Alignment of Research Data
   Management (Extended Edition). Zenodo. https://doi.org/10.5281/zenodo.4915862
   licensed under CC BY 4.0.

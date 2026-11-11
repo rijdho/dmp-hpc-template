@@ -1,6 +1,6 @@
 # Next
 
-State on 2026-11-11: version 0.2.0, a draft. The repository is
+State on 2026-11-11: version 0.2.1, a draft. The repository is
 <https://github.com/rijdho/dmp-hpc-template>; the page is published at
 <https://rijdho.github.io/dmp-hpc-template/> (GitHub Pages, branch `main`, root) since 2026-11-11.
 
@@ -43,12 +43,13 @@ State on 2026-11-11: version 0.2.0, a draft. The repository is
   are supported yet; the examples under formats include an image and a video type.
 - Questions 1 and 2 (kinds and formats of data) are removed, as Ricardo decided that day, because
   the dataset fields on type and formats ask the same; three questions remain. The examples that
-  stood under question 1 are now under the type of data. The catalogue is loaded as `en.js?v=23`.
+  stood under question 1 are now under the type of data. Question 3 asks whether proprietary software or tools are needed, in place of Science Europe's
+  question on methods and tools; its guidance stays. The catalogue is loaded as `en.js?v=24`.
 
 ## Open decisions
 
 - `src/i18n/index.js` was copied from the data management plan page and differs from it since
-  2026-11-11 in one line, the address of the catalogue (`en.js?v=23`). A change to the texts
+  2026-11-11 in one line, the address of the catalogue (`en.js?v=24`). A change to the texts
   reaches a browser that cached them only if that address changes; the same holds for
   `template.js` and `app.js`.
 - Whether IT:U guidance (storage on the cluster, retention periods) is added under the

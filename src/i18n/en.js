@@ -1,4 +1,4 @@
-// English, the only locale. `q.tools` and the lines under `q.*.guide` are quoted word for word
+// English, the only locale. The lines under `q.*.guide` are quoted word for word
 // from Science Europe's Practical Guide to the International Alignment of Research Data
 // Management (Extended Edition, 2021, https://doi.org/10.5281/zenodo.4915862, CC BY 4.0), as
 // carried by the IT:U data management plan page; tests/page.test.mjs compares them with that
@@ -107,7 +107,7 @@ export const en = {
   "form.guide.toggle": "Guidance from Science Europe",
   "q.retention": "How long does the data need to be retained?",
   "q.access": "Who needs access to this data?",
-  "q.tools": "What methods or software tools will be needed to access and use the data?",
+  "q.tools": "Does it require proprietary software or tools to access and use the data?",
   "q.tools.guide": "Indicate whether potential users need specific tools to access and (re-)use the data. Consider the sustainability of software needed for accessing the data.\nIndicate whether data will be shared via a repository, requests handled directly, or whether another mechanism will be used?",
 
   "valid.ok": "No problem found in the fields.",
@@ -135,10 +135,10 @@ export const en = {
   "md.modified": "Modified",
   "md.noDatasets": "No dataset listed.",
   "md.unanswered": "Not answered yet.",
-  "md.footer": "Written with the IT:U HPC data template, a draft prepared by DART. Question 3 and the guidance under it come from Science Europe, Practical Guide to the International Alignment of Research Data Management (Extended Edition, 2021, https://doi.org/10.5281/zenodo.4915862), CC BY 4.0. The same content as a file is hpc-template.json.",
+  "md.footer": "Written with the IT:U HPC data template, a draft prepared by DART. The guidance under question 3 comes from Science Europe, Practical Guide to the International Alignment of Research Data Management (Extended Edition, 2021, https://doi.org/10.5281/zenodo.4915862), CC BY 4.0. The same content as a file is hpc-template.json.",
 
   "about.p1": "A short form about the data of a project that uses high-performance computing at IT:U, prepared by DART: the project, its datasets and three questions. It is a draft and has not been adopted as IT:U policy. It is separate from DART’s <a href=\"https://rijdho.github.io/dart-dmp-template/\" target=\"_blank\" rel=\"noreferrer\">data management plan template</a>, and its file, hpc-template.json, is not a plan in the RDA DMP Common Standard.",
-  "about.p2": "The type of data, the formats and the size asked for each dataset take up one question of Science Europe’s <a href=\"https://doi.org/10.5281/zenodo.4915862\" target=\"_blank\" rel=\"noreferrer\">Practical Guide to the International Alignment of Research Data Management</a> (Extended Edition, 2021): “What data (for example the kinds, formats, and volumes) will be collected or produced?”. Question 3 is the guide’s, word for word, and so is the guidance under it, used under CC BY 4.0. Questions 1 and 2 and the dataset fields on files, growth and storage were written for this form.",
+  "about.p2": "The type of data, the formats and the size asked for each dataset take up one question of Science Europe’s <a href=\"https://doi.org/10.5281/zenodo.4915862\" target=\"_blank\" rel=\"noreferrer\">Practical Guide to the International Alignment of Research Data Management</a> (Extended Edition, 2021): “What data (for example the kinds, formats, and volumes) will be collected or produced?”. The guidance under question 3 is the guide’s, word for word, used under CC BY 4.0. The three questions and the dataset fields on files, growth and storage were written for this form.",
   "about.p3": "The form is derived from the IT:U data management plan page, which is built on <a href=\"https://doi.org/10.5281/zenodo.23498569\" target=\"_blank\" rel=\"noreferrer\">Actionable DMP</a>. The code is under MIT; the texts are under CC BY 4.0. Nothing is tracked, no cookie is set, and the page loads nothing from anywhere but its own origin.",
   "foot.team": "DART · IT:U Interdisciplinary Transformation University Austria",
   "foot.licence": "Code under MIT, texts under CC BY 4.0",

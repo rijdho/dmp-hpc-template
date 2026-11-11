@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.1 (2026-11-11)
+
+- Question 3 asks whether proprietary software or tools are needed to access and use the data,
+  in place of Science Europe's question on methods and software tools. Its guidance stays.
+
 ## 0.2.0 (2026-11-11)
 
 - The README, `CITATION.cff` and `NEXT.md` name the published page.

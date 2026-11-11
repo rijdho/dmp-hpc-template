@@ -24,8 +24,8 @@ Language: English.
   preferred storage format (S3, SMB, NFS, a parallel file system, block storage within a VM),
   personal and sensitive data, access and file formats. The fields on publication (DOI, date,
   repository, licence) are optional and shown folded.
-- Three questions: how long the data need to be retained, who needs access to them, and the
-  methods or software tools needed to access and use them.
+- Three questions: how long the data need to be retained, who needs access to them, and whether
+  proprietary software or tools are needed to access and use them.
 
 A new form records IT:U, with its ROR ID, as the institution.
 
@@ -43,8 +43,8 @@ Content-Security-Policy names no host the page may connect to.
 The type of data, the formats and the size asked for each dataset take up one question of
 Science Europe's Practical Guide to the International Alignment of Research Data Management
 (Extended Edition, 2021, <https://doi.org/10.5281/zenodo.4915862>): "What data (for example the
-kinds, formats, and volumes) will be collected or produced?". Question 3 is the guide's, word for
-word, and so is the guidance shown under it. Questions 1 and 2 and the dataset fields on files,
+kinds, formats, and volumes) will be collected or produced?". The guidance shown under question 3 is
+the guide's, word for word. The three questions and the dataset fields on files,
 growth and storage were written for this form.
 
 ## How it is built

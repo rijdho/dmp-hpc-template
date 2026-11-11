@@ -6,7 +6,7 @@
 // is not a plan in the RDA DMP Common Standard.
 
 export const FORMAT = 'hpc-template';
-export const VERSION = '0.2.0';
+export const VERSION = '0.2.1';
 
 /** Recorded in every new form. */
 export const INSTITUTION = Object.freeze({

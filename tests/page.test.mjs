@@ -184,12 +184,11 @@ test('the document carries every answer and the twelve filled values it is searc
   assert.match(T.toMarkdown(T.createForm(), t), /Not answered yet\./);
 });
 
-test('the quoted question and guidance are those of the IT:U data management plan page', (ctx) => {
+test('the quoted guidance is that of the IT:U data management plan page', (ctx) => {
   // The other page is a separate repository; the comparison runs where both sit side by side.
   const other = new URL('../../dart-dmp-template/src/i18n/en.js', import.meta.url);
   if (!existsSync(fileURLToPath(other))) return ctx.skip('dart-dmp-template is not next to this folder');
   return import(other.href).then(({ en: dmp }) => {
-    assert.equal(en['q.tools'], dmp['q.5c']);
     assert.equal(en['q.tools.guide'], dmp['q.5c.guide']);
     assert.ok(en['about.p2'].includes(dmp['q.1b']));
     for (const q of T.QUESTIONS) assert.equal((en[`q.${q.id}.guide`] ?? '').split('\n').filter(Boolean).length, q.guide, q.id);
