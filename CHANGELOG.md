@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.2 (2026-11-11)
+
+- The guidance under question 3 keeps only its line on the tools needed; the line on how the
+  data will be shared is removed.
+
 ## 0.2.1 (2026-11-11)
 
 - Question 3 asks whether proprietary software or tools are needed to access and use the data,

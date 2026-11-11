@@ -108,7 +108,7 @@ export const en = {
   "q.retention": "How long does the data need to be retained?",
   "q.access": "Who needs access to this data?",
   "q.tools": "Does it require proprietary software or tools to access and use the data?",
-  "q.tools.guide": "Indicate whether potential users need specific tools to access and (re-)use the data. Consider the sustainability of software needed for accessing the data.\nIndicate whether data will be shared via a repository, requests handled directly, or whether another mechanism will be used?",
+  "q.tools.guide": "Indicate whether potential users need specific tools to access and (re-)use the data. Consider the sustainability of software needed for accessing the data.",
 
   "valid.ok": "No problem found in the fields.",
   "valid.errors": "{n} value(s) to correct.",

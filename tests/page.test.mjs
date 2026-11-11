@@ -189,7 +189,7 @@ test('the quoted guidance is that of the IT:U data management plan page', (ctx) 
   const other = new URL('../../dart-dmp-template/src/i18n/en.js', import.meta.url);
   if (!existsSync(fileURLToPath(other))) return ctx.skip('dart-dmp-template is not next to this folder');
   return import(other.href).then(({ en: dmp }) => {
-    assert.equal(en['q.tools.guide'], dmp['q.5c.guide']);
+    assert.ok(dmp['q.5c.guide'].startsWith(`${en['q.tools.guide']}\n`));
     assert.ok(en['about.p2'].includes(dmp['q.1b']));
     for (const q of T.QUESTIONS) assert.equal((en[`q.${q.id}.guide`] ?? '').split('\n').filter(Boolean).length, q.guide, q.id);
   });

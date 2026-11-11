@@ -6,7 +6,7 @@
 // is not a plan in the RDA DMP Common Standard.
 
 export const FORMAT = 'hpc-template';
-export const VERSION = '0.2.1';
+export const VERSION = '0.2.2';
 
 /** Recorded in every new form. */
 export const INSTITUTION = Object.freeze({
@@ -72,7 +72,7 @@ export const DATASET_FIELDS = Object.freeze([
 export const QUESTIONS = Object.freeze([
   { id: 'retention', guide: 0 },
   { id: 'access', guide: 0 },
-  { id: 'tools', guide: 2 },
+  { id: 'tools', guide: 1 },
 ].map((q) => Object.freeze(q)));
 
 export const QUESTION_IDS = Object.freeze(QUESTIONS.map((q) => q.id));
